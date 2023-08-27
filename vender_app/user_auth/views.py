@@ -6,13 +6,14 @@ from user_auth.models.abstacts_user_model import *
 from rest_framework import generics
 from django.views.decorators.csrf import csrf_exempt
 from drf_yasg.utils import swagger_auto_schema
-from user_auth.serializers.signup_serilaizer import VendorSignupSerializer, UserSerializer, UserSignupSerializer
+from user_auth.serializers.signup_serilaizer import VendorSignupSerializer,  UserSignupSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import  IsAuthenticated
-from user_auth.models.product_model import Product
-from user_auth.serializers.signup_serilaizer import ProductSerilaizer
+from user_auth.models.product_model import Product, Cart
+# from user_auth.serializers.signup_serilaizer import ProductSerilaizer
 
-from user_auth.permission import IsVendorUser 
+from user_auth.permission import IsVendorUser
+from user_auth.serializers.cart_serilaizer import CartSerilaizer , ProductSerilaizer
 
 
 
@@ -75,3 +76,12 @@ class ProducatCreatView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated&IsVendorUser]
     queryset = Product.objects.all()
     serializer_class = ProductSerilaizer
+
+
+
+
+
+class CartCreatView(generics.CreateAPIView):
+    # permission_classes = [IsAuthenticated&IsVendorUser]
+    queryset = Cart.objects.all()
+    serializer_class = CartSerilaizer

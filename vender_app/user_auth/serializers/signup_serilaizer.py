@@ -7,10 +7,6 @@ from rest_framework.authtoken.models import Token
 from user_auth.models.product_model import Product
 
 
-class UserSerializer(serializers.Serializer):
-    class Meta:
-        model = User
-        fields = '__all__'
 
 
 class VendorSignupSerializer(serializers.ModelSerializer):
@@ -36,7 +32,7 @@ class VendorSignupSerializer(serializers.ModelSerializer):
             is_vendor=True
         )
         user.set_password(password)
-        # user.is_vendor = True
+        
         user.save()
         
         return user
@@ -70,8 +66,3 @@ class UserSignupSerializer(serializers.ModelSerializer):
         
         return user
     
-
-class ProductSerilaizer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = '__all__'
